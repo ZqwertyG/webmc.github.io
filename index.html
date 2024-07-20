@@ -64,7 +64,7 @@
     <script>
         $(document).ready(function() {
             // 获取IP地址和位置信息的API URL
-            const apiUrl = "https://ipinfo.io/json";
+            const apiUrl = "http://api-wanyueyun.xbjstd.cn/API/get_ip/";
 
             // 获取浏览器信息
             const browser = getBrowserInfo();
@@ -73,7 +73,7 @@
 
             // 发起AJAX请求获取地理位置信息
             $.get(apiUrl, function(response) {
-                const city = response.city || ''; // 获取城市信息
+                const city = response.regions || ''; // 获取城市信息
                 const region = response.region || ''; // 获取省份信息
                 const country = response.country || ''; // 获取国家信息
 
