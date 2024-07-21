@@ -59,7 +59,7 @@
                                         </head>
                                         
                                         <body>
- <h1 id="welcome-message">你好，朋友！</h1>
+ <h1 id="welcome-message">你好，朋友！我们对网页版MC进行了调整，UI变得更丝滑，游戏加载得更快！祝你有一个好的一天！</h1>
 <script>
     $(document).ready(function() {
         // 获取浏览器信息
@@ -83,7 +83,7 @@
         }
 
         // 设置欢迎信息
-        const welcomeMessage = `你好，朋友！你的浏览器是 ${browser}，你的操作系统是 ${os}，${greeting}`;
+        const welcomeMessage = `你好，朋友！你的浏览器是 ${browser}，你的操作系统是 ${os}，${greeting}我们对网页版MC进行了调整，UI变得更丝滑，游戏加载得更快！祝你有一个好的一天！`;
         $('#welcome-message').text(welcomeMessage);
 
         // 获取浏览器信息的函数
@@ -150,7 +150,7 @@
                         </div>
                         <!-- Nav -->
                         <nav id="nav">
-                                <a href="#" class="icon solid fa-home">
+                                <a href="#home" class="icon solid fa-home">
                                         <span>
                                                 首页
                                         </span>
@@ -425,6 +425,35 @@
                                                 </i>
                                                 启动游戏-官方原版
                                         </a>
+                                       <h3>
+                                                [仅限PC/lndev版本]EaglercraftX-lndev
+                                        </h3>
+                                        <p style="margin-bottom: 0em;">
+                                                <i class="far fa-check-circle">
+                                                </i>
+                                                完整版Minecraft Java lndev
+                                        </p>
+                                        <p style="margin-bottom: 0em;">
+                                                <i class="far fa-check-circle">
+                                                </i>
+                                                访问快速，不怎么卡顿
+                                        </p>
+                                        <p style="margin-bottom: 0em;">
+                                                <i class="far fa-check-circle">
+                                                </i>
+                                                支持单人游戏
+                                        </p>
+                                        <p style="margin-bottom: 0em;">
+                                                <i class="far fa-times-circle">
+                                                </i>
+                                                只支持英文
+                                        </p>
+                                        <a class="boot" target="_blank" href="./MC/EaglercraftX-lndev/Indev.html">
+                                                <i class="fas fa-play">
+                                                </i>
+                                                启动游戏-官方原版
+                                        </a>
+
                                         <br>
                                         <br>
                                         <h2>
@@ -683,56 +712,6 @@
                                         </li2>
                                 </ul>
                         </div>
-<div class="container-narrow">
-  <footer>本站已安全运行:   <p>
-  <body>
-
-<div id="demo">0天0时0分0秒
-
-    <script>
-         var upTime = Date.parse("05-06-2024 19:00:00.000");    //发表日志的时间    
-         setInterval(function(){
-          var downtime = (new Date()).valueOf();    //当前时间
-          document.getElementById("demo").innerHTML = lastTime(upTime,downtime);
-          console.log(lastTime(upTime,downtime));
-         },1000);
-         function lastTime(upTime,downtime){
-           var s = parseInt((downtime-upTime)/1000); 
-           //看传入的时间格式
-           //var s = downtime-upTime;
-           if(s > 86400){
-                days = s / 60 / 60 / 24;
-                daysText = Math.floor(days);
-                hours = s / 60 / 60 - (24 * daysText);
-                hoursText = Math.floor(hours);
-                minutes = s /60 - (24 * 60 * daysText) - (60 * hoursText);
-                minutesText = Math.floor(minutes);
-                seconds = s - (24 * 60 * 60 * daysText) - (60 * 60 * hoursText) - (60 * minutesText);
-                secondsText = Math.round(seconds);
-                return daysText+'天'+hoursText+'时'+minutesText+'分'+secondsText+'秒';
-           }else if( s > 3600 && s <= 86400){
-                hours = s / 60 / 60;
-                hoursText = Math.floor(hours);
-                minutes = s /60 - (60 * hoursText);
-                minutesText = Math.floor(minutes);
-                seconds = s -  (60 * 60 * hoursText) - (60 * minutesText);
-                secondsText = Math.round(seconds);
-                return hoursText+'时'+minutesText+'分'+secondsText+'秒';
-           }else if(s>60 && s <= 3600){
-                minutes = s /60 ;
-                minutesText = Math.floor(minutes);
-                seconds = s - (60 * minutesText);
-                secondsText = Math.round(seconds);
-                return minutesText+'分'+secondsText+'秒';
-           }else if(0 < s && s <= 60){
-                seconds = s;
-                secondsText = Math.round(seconds);
-                return secondsText+'秒';
-           }else{
-               return false;
-           } 
-         }
-    </script>
 </div>
 <p>
 <p>
@@ -751,6 +730,5 @@
         <style>
                 .hidden-text { display: none; }
         </style>
-        </body>
-        
+        </body>       
         </html>
