@@ -23,6 +23,16 @@ window.addEventListener("load", function(){
 const relayId = Math.floor(Math.random() * 3);
 window.eaglercraftOpts = {
 container: "game_frame", assetsURI: "assets.epk", serverWorkerURI: "worker_bootstrap.js", worldsFolder: "MAIN",
+servers: [
+	{
+	serverName: "Ayunboom",
+	serverAddress: "wss://sus.shhnowisnottheti.me",
+	hideAddress: false,
+	},
+],
+relays: [
+	{ addr: "wss://relay.lax1dude.net/", name: "lax1dude relay #2", primary: relayId == 0 },
+],
 mainMenu: { splashes: [
 "Darviglet!", "eaglerenophile!", "You Eagler!", "Yeeeeeee!", "yeee",
 "EEEEEEEEE!", "You Darvig!", "You Vigg!", ":>", "|>", "You Yumpster!"
