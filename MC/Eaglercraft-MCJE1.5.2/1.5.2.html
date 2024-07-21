@@ -23,48 +23,6 @@ window.addEventListener("load", function(){
 const relayId = Math.floor(Math.random() * 3);
 window.eaglercraftOpts = {
 container: "game_frame", assetsURI: "assets.epk", serverWorkerURI: "worker_bootstrap.js", worldsFolder: "MAIN",
-servers: [
-	{
-	serverName: "Asspixel",
-	serverAddress: "wss://web.asspixel.net/CAP/",
-	hideAddress: false,
-	},
-	{
-	serverName: "VanillaCraft",
-	serverAddress: "wss://play.vanillacraftsmp.org",
-	hideAddress: false,
-	},
-	{
-	serverName: "CraftClue",
-	serverAddress: "wss://play.craftclue.rocks",
-	hideAddress: false,
-	},
-	{
-	serverName: "Ayunboom",
-	serverAddress: "wss://sus.shhnowisnottheti.me",
-	hideAddress: false,
-	},
-	{
-	serverName: "Sealcraft",
-	serverAddress: "wss://sealcraft.ddns.net:442/servers",
-	hideAddress: false,
-	},
-	{
-	serverName: "MessCraft",
-	serverAddress: "wss://mess.eu.org/s1/",
-	hideAddress: false,
-	},
-	{
-	serverName: "HardCoreSMP",
-	serverAddress: "wss://hardcoresmp.mrnewt.repl.co/serve",
-	hideAddress: false,
-	},
-],
-relays: [
-	{ addr: "wss://relay.deev.is/", name: "lax1dude relay #1", primary: relayId == 0 },
-	{ addr: "wss://relay.lax1dude.net/", name: "lax1dude relay #2", primary: relayId == 1 },
-	{ addr: "wss://relay.shhnowisnottheti.me/", name: "ayunami relay #1", primary: relayId == 2 }
-],
 mainMenu: { splashes: [
 "Darviglet!", "eaglerenophile!", "You Eagler!", "Yeeeeeee!", "yeee",
 "EEEEEEEEE!", "You Darvig!", "You Vigg!", ":>", "|>", "You Yumpster!"
