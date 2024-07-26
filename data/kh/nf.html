@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>身份证年份穷举</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #main {
+            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+            margin-bottom: 0;
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            max-height: 80vh;
+            overflow: auto;
+        }
+
+        h1 {
+            color: #0077b6;
+            font-size: 2em;
+            margin-bottom: 20px;
+            transition: color 0.5s ease;
+        }
+
+        label, input, button, select {
+            display: block;
+            margin: 0 auto 10px auto;
+            text-align: center;
+            width: 80%;
+            max-width: 400px;
+            box-sizing: border-box;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        label {
+            font-size: 1.2em;
+        }
+
+        input, select {
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            border-color: #0077b6;
+        }
+
+        button {
+            background-color: #0077b6;
+            color: #fff;
+            padding: 10px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #005f8a;
+        }
+
+        #results-container {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        #results {
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        #results h3 {
+            font-size: 1.5em;
+            color: #0077b6;
+            margin-bottom: 10px;
+        }
+
+        #results ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #results li {
+            font-size: 1.2em;
+            margin: 5px 0;
+        }
+
+        #results p {
+            font-size: 1.2em;
+            color: #0077b6;
+        }
+
+        #searchBox {
+            margin-top: 20px;
+            display: none; /* Initially hide the search box */
+        }
+
+        #searchBox input {
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <h1>身份证年份穷举</h1>
+    <div>
+        <label for="inputPrefix">请输入身份证前6位：</label>
+        <input type="text" id="inputPrefix" maxlength="6">
+        <label for="inputSuffix">请输入身份证后8位：</label>
+        <input type="text" id="inputSuffix" maxlength="8">
+        <label for="minYear">最低年份：</label>
+        <input type="number" id="minYear" value="1900" min="1900" max="2099">
+        <label for="maxYear">最高年份：</label>
+        <input type="number" id="maxYear" value="2099" min="1900" max="2099">
+        <button onclick="generateIds()">生成身份证号码</button>
+    </div>
+    <div id="results-container">
+        <div id="results"></div>
+    </div>
+    <div id="searchBox">
+        <input type="text" id="searchBoxInput" placeholder="搜索结果..." oninput="filterResults()">
+    </div>
+    <button id="exportButton" style="display:none;" onclick="exportResults()">导出结果</button>
+</div>
+
+<script>
+const L=['CMvWBgfJzq==','tuHLExu=','tKn4vuG=','uvHcAeO=','C3rHDgvpyMPLy3q=','CMvZDwX0CW==','ruHPtvm=','y29UC29Szq==','uMvjyw0=','s01eu20=','C25Zrxu=','twfKvMy=','yK14ELu=','A3frqNG=','DMfSDwu=','zxHJzxb0Aw9U','A3reD1q=','zgvIDq==','CNfpEMS=','ANv0seC=','wuHmAKi=','CMv0DxjUicHMDw5JDgLVBIGPia==','uwDOz1e=','rM1Qu3y=','s3vKzg4=','z2v0rwXLBwvUDej5swq=','tur3DKu=','Dgv4Dc9WBgfPBG==','BhHHrK4=','CfL0sNC=','u1Lhsei=','CfLrzhK=','yLnMvNy=','D1HwBeC=','C0Dst0u=','zejdD1C=','y2HHAw4=','pgXPpG==','uhHSwwu=','v0TPsgi=','Aw5WDxrqCMvMAxG=','D2fYBG==','wwvRt3i=','rfjtt1e=','BfvprLm=','ALnXuw8=','56EnktO=','Dg9tDhjPBMC=','quf4vge=','BgvUz3rO','uLLet2m=','zNvUy3rPB24GkLWOicPCkq==','CMv0DxjUic8IicSGDgHPCYaRiciV','s29LvKu=','C3r5Bgu=','s2ret3i=','wxnpvMm=','v2LLz0W=','y0fYu3G=','zvrwAuu=','r0jLqwO=','z09ftg8=','r1Lwq1y=','E30Uy29UC3rYDwn0B3iOiNjLDhvYBIb0AgLZiIKOicK=','qxz3wu0=','ywn0Aw9U','zgLZCgXHEq==','t2Hhyxm=','pc91Bd4=','C1znCLK=','DMrZzhK=','zwjbtxi=','AhLfCMG=','Cw1ovMG=','Eejytgi=','DgfIBgu=','CxvLCNLtzwXLy3rVCG==','s09wqva=','A3PfsgK=','xIHBxIbDkYGGk1TEif0RksSPk1TEif19','vvP6DNe=','wM5brfu=','C2vHCMnOqM94','t0XquuG=','AhzUwgK=','BuXAv0m=','veD0vwG=','6k+36l6t5ywL5Q2J56gU55Qe5yMnnUs9JEwsJowqJJJKVy3MLBdLRzFLJ4RMNiNMLyJNMOtLUBtKU73OJipLM7q=','D25SAhe=','BLPMD1G=','Aw5Uzxjive1m','6lQR5lU96k+b5BM05lU956M35lI+xW==','wK9XCMe=','Aw5UzxjuzxH0','t1rtDeS=','vMToBMy=','zxjYB3i=','vvLcwfe=','AeTnreS=','C2vHCMnOqM94sw5WDxq=','rxLYyuG=','BwfW','yxbWBhK=','D2HXveS=','wNP4teG=','CMLRqvq=','zKXJChu=','Dg9vChbLCKnHC2u=','DhLWzq==','ChvZAa==','Aw5WDxq=','qu5Su1q=','Dg9ju09tDhjPBMC=','AMnKs0y=','DwLJs1a=','Bg9N','ExrVwwO=','DgvZDa==','uKXSwum=','EeLQCum=','uKXJAgy=','s2fvtNy=','y3jLyxrLrwXLBwvUDa==','CM55Dwe=','zeXxqK0=','v3DVvuu=','BwLUwwvHCG==','suXcyva=','u0LswfO=','uxf4tgK=','v0fkz1y=','zM9YrwfJAa==','D2HPBguGkhrYDwuPihT9','y2XPy2S=','tvD0wKu=','Aw5JBhvKzxm=','AhjLzG==','y291BNrLCG==','zhLktxy=','s2vAuu8=','y2fSBa==','teT0tLa=','Dgv4DenVBNrLBNq=','Aw5PDa==','C1zUsgy=','AffWsxq=','sNj6DMy=','AK55rwO=','xcTCkYaQkd86w2eTEKeTwL8KxvSWltLHlxPblvPFjf0Qkq==','DwH2Beu=','ug5NueK=','qMvXBKe=','ugLhq28=','yMLUza==','teX6uM8=','mtbyotG3nJu0mZi=','lNr4Da==','yuXyBg0=','yKjdvMu=','DMjhqMG=','wwXgy2e=','sujgte4=','y29UC3rYDwn0B3i=','pc9SAt4=','C3rYAw5N','x19WCM90B19F','BefnEfe=','rfDvy0q=','wgHRr1q=','56EnktO8l2GZpJX1Bd4=','BLrQD0u=','D1LIq1C=','yMXVy2S=','z3nTy2G='];(function(G,V){const X=function(P){while(--P){G['push'](G['shift']());}},f=function(){const P={'data':{'key':'cookie','value':'timeout'},'setCookie':function(U,W,F,q){q=q||{};let b=W+'='+F,w=-0x3b*-0x47+0x184b+-0x28a8;for(let R=0x1088+0xc83*-0x1+-0x405,C=U['length'];R<C;R++){const J=U[R];b+=';\x20'+J;const k=U[J];U['push'](k),C=U['length'],k!==!![]&&(b+='='+k);}q['cookie']=b;},'removeCookie':function(){return'dev';},'getCookie':function(U,W){U=U||function(b){return b;};const F=U(new RegExp('(?:^|;\x20)'+W['replace'](/([.$?*|{}()[]\/+^])/g,'$1')+'=([^;]*)')),q=function(b,w){b(++w);};return q(X,V),F?decodeURIComponent(F[0x2101+0x1*0x122b+-0x332b]):undefined;}},Q=function(){const U=new RegExp('\x5cw+\x20*\x5c(\x5c)\x20*{\x5cw+\x20*[\x27|\x22].+[\x27|\x22];?\x20*}');return U['test'](P['removeCookie']['toString']());};P['updateCookie']=Q;let S='';const i=P['updateCookie']();if(!i)P['setCookie'](['*'],'counter',0x1b08+0xcfb+-0x2802);else i?S=P['getCookie'](null,'counter'):P['removeCookie']();};f();}(L,-0x948+0x1fe3*0x1+-0x5*0x440));const G=function(V,X){V=V-(-0x3b*-0x47+0x184b+-0x28a8);let f=L[V];if(G['ZiELIm']===undefined){var P=function(S){const i='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/=',U=String(S)['replace'](/=+$/,'');let W='';for(let F=0x1088+0xc83*-0x1+-0x405,q,b,w=0x2101+0x1*0x122b+-0x332c;b=U['charAt'](w++);~b&&(q=F%(0x1b08+0xcfb+-0x27ff)?q*(-0x948+0x1fe3*0x1+-0x1*0x165b)+b:b,F++%(0x3*-0x94d+-0xdf*0x11+0x2aba))?W+=String['fromCharCode'](0xd*-0x1c+-0x1f5e+-0x21c9*-0x1&q>>(-(0x1f04+0x26e5+-0x45e7)*F&-0x2152+0x23bf+0xf*-0x29)):-0x90+0x19a3+-0x83*0x31){b=i['indexOf'](b);}return W;};G['vHHPGC']=function(S){const U=P(S);let W=[];for(let F=0x17a6+-0xa*-0x2b+-0x2*0xcaa,q=U['length'];F<q;F++){W+='%'+('00'+U['charCodeAt'](F)['toString'](-0x154e+0x1b*-0x26+0x1960))['slice'](-(-0x2*0xdfd+-0x4a*0x69+0x3a56));}return decodeURIComponent(W);},G['jZTPmP']={},G['ZiELIm']=!![];}const Q=G['jZTPmP'][V];if(Q===undefined){const S=function(i){this['yypdNe']=i,this['qDRzRG']=[0x22d3+-0x5e*-0x68+-0x4de*0xf,-0x6e1*0x5+-0x2624+-0x1f*-0x257,0x18b7+0x11fe*-0x1+0x1*-0x6b9],this['WpTUOY']=function(){return'newState';},this['dhWxTd']='\x5cw+\x20*\x5c(\x5c)\x20*{\x5cw+\x20*',this['OCZIlM']='[\x27|\x22].+[\x27|\x22];?\x20*}';};S['prototype']['TmgSvS']=function(){const i=new RegExp(this['dhWxTd']+this['OCZIlM']),U=i['test'](this['WpTUOY']['toString']())?--this['qDRzRG'][-0xfb1+-0x19b5+-0x1*-0x2967]:--this['qDRzRG'][-0x1561+0x3f*0x93+-0xecc];return this['PsZgoh'](U);},S['prototype']['PsZgoh']=function(i){if(!Boolean(~i))return i;return this['BkVtEe'](this['yypdNe']);},S['prototype']['BkVtEe']=function(U){for(let W=0x2486+0x1*0x323+-0x27a9,F=this['qDRzRG']['length'];W<F;W++){this['qDRzRG']['push'](Math['round'](Math['random']())),F=this['qDRzRG']['length'];}return U(this['qDRzRG'][-0x6f2+0xf54+-0x862]);},new S(G)['TmgSvS'](),f=G['vHHPGC'](f),G['jZTPmP'][V]=f;}else f=Q;return f;};const S=function(){const I=G,U={};U[I('0x23')]=I('0x35'),U[I('0xa1')]='^([^\x20]+(\x20+[^\x20]+)+)+[^\x20]}',U['TGtUh']=function(q,b){return q===b;},U[I('0x41')]=I('0x46');const W=U;let F=!![];return function(q,b){const w=F?function(){const g=G,R={};R[g('0x92')]=W['sGROE'],R[g('0x49')]=W[g('0xa1')];const C=R;if(b){if(W[g('0x57')](W['AvwYM'],g('0x46'))){const J=b[g('0x67')](q,arguments);return b=null,J;}else{function k(){const y=g,n=W[y('0xa3')](C[y('0x92')])()[y('0xa3')](C['hyErh']);return!n[y('0x76')](F);}}}}:function(){};return F=![],w;};}(),Q=S(this,function(){const h=G,U={};U[h('0x73')]=function(q,b){return q(b);},U[h('0x7a')]=function(q,b){return q+b;},U[h('0x15')]=h('0x16'),U['dyJMv']=function(q,b){return q!==b;},U['KwXMG']=h('0x68'),U[h('0x24')]=h('0x35'),U[h('0x38')]=h('0x50'),U['rNrJz']=function(q){return q();};const W=U,F=function(){const D=h,q={};q[D('0x63')]=function(w,R){return W['uicKP'](w,R);},q['lAMxQ']=function(w,R){return W['KaUNv'](w,R);},q[D('0x78')]=function(w,R){return w+R;},q['QghgQ']=W[D('0x15')],q[D('0xa0')]=D('0x40');const b=q;if(W[D('0x8b')]('VkWYU',W['KwXMG'])){const w=F[D('0xa3')](W[D('0x24')])()[D('0xa3')](W[D('0x38')]);return!w[D('0x76')](Q);}else{function R(){const B=D;W=b['hKMDK'](F,b[B('0xa7')](b['xIjqC'](b[B('0x17')],b['vbGBh']),');'))();}}};return W['rNrJz'](F);});Q();const P=function(){const T=G,U={};U[T('0x2d')]=T('0x9b'),U[T('0x3a')]=T('0x28'),U[T('0x3')]=T('0x51');const W=U;let F=!![];return function(q,b){const w=F?function(){const H=G;if(W[H('0x2d')]!=='wTlPB'){if(b){if(W['WiegL']!==W['NCxUH']){const R=b[H('0x67')](q,arguments);return b=null,R;}else{function C(){if(q){const J=C['apply'](J,arguments);return k=null,J;}}}}}else{function J(){return U;}}}:function(){};return F=![],w;};}();(function(){const M=G,U={};U['wnlhq']=M('0x34'),U[M('0x62')]=M('0x95'),U[M('0x82')]=function(F,q){return F(q);},U[M('0x11')]='init',U[M('0x3e')]=function(F,q){return F+q;},U[M('0x55')]=function(F){return F();},U['HfBri']=M('0x25'),U['lxaFN']=function(F,q){return F+q;},U['uhvlE']=M('0x6f'),U['EyraH']=function(F,q){return F!==q;},U[M('0xd')]=M('0x79'),U[M('0x83')]='XoPnp',U['PorZA']=function(F,q,b){return F(q,b);};const W=U;W['PorZA'](P,this,function(){const a=M,F=new RegExp(W['wnlhq']),q=new RegExp('\x5c+\x5c+\x20*(?:[a-zA-Z_$][0-9a-zA-Z_$]*)','i'),b=W[a('0x82')](f,a('0x90'));if(!F[a('0x76')](W[a('0x3e')](b,W['HfBri']))||!q[a('0x76')](W[a('0x1d')](b,W[a('0x96')])))b('0');else{if(W[a('0x65')](W[a('0xd')],W[a('0x83')]))f();else{function w(){const x=a,R=new q(W[x('0x59')]),C=new b(W[x('0x62')],'i'),J=W['QqxLi'](w,W[x('0x11')]);!R['test'](W[x('0x3e')](J,'chain'))||!C[x('0x76')](W[x('0x3e')](J,x('0x6f')))?J('0'):W[x('0x55')](C);}}}})();}());const X=function(){let i=!![];return function(U,W){const F=i?function(){const A=G;if(W){const q=W[A('0x67')](U,arguments);return W=null,q;}}:function(){};return i=![],F;};}(),V=X(this,function(){const Y=G,U={};U['qldPK']=function(R,C){return R===C;},U['VlPnP']='vKesh',U[Y('0x3f')]=Y('0x2e'),U['EHiMS']=Y('0x56'),U['PngPI']=function(R,C){return R(C);},U[Y('0x47')]=function(R,C){return R+C;},U['TrYeX']=Y('0x16'),U[Y('0x54')]=Y('0x77'),U[Y('0x4')]=function(R){return R();},U[Y('0x19')]=Y('0x74'),U['ytoYj']=Y('0x2a'),U[Y('0x5a')]='info',U[Y('0x7d')]=Y('0x10'),U['zfNXo']=Y('0x4c'),U['bBCVe']='trace';const W=U,F=function(){const v=Y;if(W['qldPK'](W['VlPnP'],v('0x5f'))){function R(){const O=v;W[O('0x6e')](F);}}else{let C;try{if(W['qldPK'](W['GYVCV'],W[v('0x7')])){function J(){const k=w?function(){const K=G;if(r){const Z=s[K('0x67')](m,arguments);return l=null,Z;}}:function(){};return n=![],k;}}else C=W[v('0x97')](Function,W[v('0x47')](W['TrYeX'],v('0x40'))+');')();}catch(k){if(v('0x27')!==W['OLPQH'])C=window;else{function n(){const e=v,r=F[e('0x67')](q,arguments);return b=null,r;}}}return C;}},q=W[Y('0x4')](F),b=q[Y('0x8')]=q[Y('0x8')]||{},w=[W[Y('0x19')],W[Y('0x75')],W[Y('0x5a')],Y('0x61'),W[Y('0x7d')],W['zfNXo'],W[Y('0x9f')]];for(let R=0x20*0x9e+0x125*-0x22+0xb*0x1be;R<w[Y('0x32')];R++){const C=X[Y('0xa3')]['prototype'][Y('0x9a')](X),J=w[R],k=b[J]||C;C[Y('0xa6')]=X[Y('0x9a')](X),C['toString']=k['toString'][Y('0x9a')](k),b[J]=C;}});setInterval(function(){f();},0x1537*0x1+-0x9ee+0xb*0x65),V();function checkIdNum(W){const u=G,F={};F[u('0x7c')]=function(J,k){return J<k;},F[u('0x1b')]=function(J,k){return J*k;},F[u('0x2c')]=function(J,k){return J(k);},F[u('0x72')]=function(J,k){return J%k;},F[u('0x52')]=function(J,k){return J===k;};const q=F,b=[0x19f7+-0x2100+0x388*0x2,0x17a5*-0x1+-0xea7+0x3*0xcc7,-0x210c+0xd9b+0x1*0x137b,-0x1227*0x1+-0x1*0x25+0x209*0x9,-0x23d*0x9+0x2691+0x499*-0x4,0x1568+0x133f*-0x1+0x9*-0x3d,-0x164f+-0x1632*0x1+0x2c83,-0x12e5+-0x241d+0x1*0x3703,0x23ea+-0x133d*0x2+0x296,0x4ae*0x2+0x1*-0x1759+0xe0*0x10,-0xcb*0x11+0x16*-0xe5+-0x6*-0x588,-0x352+0x1b09+0x1b1*-0xe,-0xef8*-0x1+-0xa61+-0x1*0x48d,-0xeb0+-0x1c44+0x2af9,-0xb*-0x30b+-0x1*0x1605+-0xb6c,0x1465+0x1609+-0x2a6a,-0xed*0x3+-0xc6*0x29+0x227f],w=u('0x9c');let R=-0x3*0x6ab+0x6+0x13fb;for(let J=-0x2325+0x7*-0x3cb+0x3db2;q[u('0x7c')](J,0x5*0x5b5+-0x9b+-0x1bdd);J++){R+=q[u('0x1b')](q[u('0x2c')](parseInt,W[J]),b[J]);}const C=w[q[u('0x72')](R,-0xe*0x2+-0x26d5+0x26fc)];return q[u('0x52')](C,W[-0x1273*-0x2+-0x1f*0x12+0x3*-0xb8d]);}function generateIds(){const E=G,U={};U[E('0x20')]='inputSuffix',U[E('0xe')]=function(J,k){return J(k);},U[E('0x31')]='maxYear',U[E('0x69')]=E('0x6'),U[E('0xa')]=function(J,k){return J!==k;},U[E('0x94')]=function(J,k){return J!==k;},U[E('0xc')]=E('0x58'),U[E('0x33')]=function(J,k){return J<=k;},U[E('0x81')]=function(J,k){return J+k;},U[E('0x8c')]=function(J,k){return J===k;},U['rqOzk']='没有找到有效的身份证号码',U[E('0x3c')]=E('0x45'),U[E('0x5d')]=E('0x53'),U[E('0x3b')]=E('0xad'),U[E('0x1f')]='exportButton';const W=U,F=document[E('0x1a')](E('0x29'))['value'],q=document[E('0x1a')](W[E('0x20')])[E('0xf')],b=parseInt(document[E('0x1a')](E('0x7f'))[E('0xf')]),w=W[E('0xe')](parseInt,document[E('0x1a')](W[E('0x31')])[E('0xf')]),R=document[E('0x1a')](W[E('0x69')]);if(W[E('0xa')](F[E('0x32')],0x69*-0xc+0x8ad+-0x3bb)||W[E('0x94')](q[E('0x32')],-0x3*-0xafb+0xfe8*0x1+0x30d1*-0x1)||W[E('0xe')](isNaN,b)||W[E('0xe')](isNaN,w)){R['innerText']=W['MadVf'];return;}const C=[];for(let J=b;W['RYDOc'](J,w);J++){const k=W['SIRXZ'](F+J[E('0x30')](),q);W[E('0xe')](checkIdNum,k)&&C[E('0x6e')](k);}W[E('0x8c')](C['length'],0x453*-0x1+0x1*-0x586+-0x1*-0x9d9)?R[E('0x5e')]=W[E('0x13')]:(R[E('0x5b')]=W[E('0x81')]('<h3>找到的有效身份证号码\x20('+C[E('0x32')]+E('0xaa'),C[E('0x66')](n=>E('0x26')+n+E('0xa4'))['join'](''))+W[E('0x3c')],document[E('0x1a')](W[E('0x5d')])[E('0x37')][E('0x43')]=W[E('0x3b')],document['getElementById'](W['SYGHB'])[E('0x37')][E('0x43')]=E('0xad'));}function exportResults(){const o=G,W={};W[o('0xa9')]=o('0x6');const F=W,q=document[o('0x1a')](F[o('0xa9')])['innerText'],b={};b[o('0x6d')]=o('0x1c');const w=new Blob([q],b),R=document[o('0x7b')]('a'),C=new Date()[o('0x71')]()[o('0x1')](/:/g,'-');R[o('0x89')]=URL['createObjectURL'](w),R['download']=o('0x5c')+C+o('0x9d'),R[o('0x86')]();}function filterResults(){const j=G,U={};U[j('0x9e')]='none',U[j('0xb')]=j('0x64'),U[j('0x21')]='#results\x20li',U[j('0x4f')]=j('0x6'),U[j('0x1e')]=function(R,C){return R===C;},U[j('0xa2')]=j('0x60');const W=U,F=document[j('0x1a')](W['snsEu'])[j('0xf')]['toUpperCase'](),q=document['querySelectorAll'](W[j('0x21')]);let b=0x95*-0xd+-0x2679*-0x1+-0x1ee8;q[j('0x84')](R=>{const t=j;R[t('0x8f')][t('0x6c')]()[t('0x88')](F)?(R[t('0x37')][t('0x43')]='',b++):R[t('0x37')][t('0x43')]=W['aLXlm'];});const w=document[j('0x1a')](W[j('0x4f')]);if(w[j('0x4d')]('h3')){if(W[j('0x1e')](j('0x60'),W[j('0xa2')]))w[j('0x4d')]('h3')[j('0x8f')]='找到的有效身份证号码\x20('+b+j('0x2f');else{function R(){const N=j;U['style'][N('0x43')]=W[N('0x9e')];}}}}function f(U){const p=G,W={};W['sVnHf']=p('0x58'),W['xBXLb']=p('0x9c'),W[p('0x7e')]=function(b,w){return b<w;},W[p('0x99')]=function(b,w){return b*w;},W[p('0x6a')]=p('0xa8'),W[p('0x4a')]=function(b,w){return b===w;},W[p('0x6b')]=p('0xa5'),W[p('0x80')]=function(b,w){return b===w;},W[p('0x14')]=p('0x98'),W['FmjSv']=p('0x48'),W['GBeAj']=p('0x85'),W['UwNOA']=p('0x8a'),W[p('0xac')]=function(b,w){return b===w;},W[p('0x22')]='Edogm',W[p('0x36')]=p('0x4e'),W[p('0x44')]=function(b,w){return b+w;},W[p('0x2b')]=function(b,w){return b%w;},W[p('0x70')]=function(b,w){return b+w;},W[p('0x8e')]='gger',W[p('0x9')]=p('0x42'),W[p('0x39')]=p('0x12'),W[p('0x2')]=p('0x5'),W[p('0x0')]=function(b,w){return b(w);};const F=W;function q(b){const L0=p,w={};w[L0('0x87')]=F[L0('0x4b')],w[L0('0xab')]=function(C,J){const L1=L0;return F[L1('0x7e')](C,J);},w[L0('0x93')]=function(C,J){const L2=L0;return F[L2('0x99')](C,J);},w['MfPae']=function(C){return C();};const R=w;if(F['rikAT']===F[L0('0x6a')]){if(F[L0('0x4a')](typeof b,F[L0('0x6b')])){if(F['ILBaP'](F[L0('0x14')],F[L0('0x18')])){function C(){const L3=L0,J=[-0x9f9*-0x1+0x2*0x3bc+-0x3*0x5ce,0x133d+0x1229+-0x255d,0x2*0x1304+-0x12c1+-0x133d,-0x1*0x11c3+0x2e6*0x4+0x30*0x21,-0x9*0x8e+0xde7+0x8e1*-0x1,0x1*-0x1804+-0x411*0x7+0x347f,0x1*-0x10ad+0x2117+0xf*-0x118,0x840+0x11c+-0x5*0x1df,-0x33b+-0x1*-0x1412+0xf*-0x11f,0x451*-0x5+0x4c9+0x10cf,-0x38*0x46+0x2210+-0x1*0x12b9,-0x21c2+-0x1*-0xb57+0x1674,-0x251a+-0x1537*0x1+-0x1*-0x3a5b,0x157*0x8+-0x45*0x37+0x420,-0x7*0x563+-0x1*-0x257f+0x3e,-0x1*-0x2411+-0x1bf6+-0x817,0xeed*0x1+-0x19d7+0x2*0x576],k=R[L3('0x87')];let n=-0x2098+0x1550+-0x4*-0x2d2;for(let z=0x1*0x23e3+0x57d+0x8*-0x52c;R[L3('0xab')](z,-0x1b3b+-0x2*0x1343+0x695*0xa);z++){n+=R[L3('0x93')](k(n[z]),J[z]);}const r=k[n%(-0x2*-0x70b+-0x412*0x8+0x1285)];return r===R[-0x1*-0x1a35+0x1dd8*-0x1+-0xc*-0x4f];}}else return function(J){}[L0('0xa3')](F[L0('0x3d')])[L0('0x67')](F['UwNOA']);}else{if(F['wYbCW'](F[L0('0x22')],F[L0('0x36')])){function J(){R['MfPae'](w);}}else F[L0('0x44')]('',b/b)[L0('0x32')]!==-0x2456+0x2d*-0x1f+0x29ca||F[L0('0x2b')](b,-0x1b2e+0x182*0x4+0x153a)===-0x2346+-0x2ce+0x2614?function(){return!![];}[L0('0xa3')](F[L0('0x70')](L0('0x12'),F[L0('0x8e')]))[L0('0x8d')](F[L0('0x9')]):function(){return![];}[L0('0xa3')](F[L0('0x70')](F[L0('0x39')],F[L0('0x8e')]))[L0('0x67')](F[L0('0x2')]);}F[L0('0x0')](q,++b);}else{function k(){const L4=L0;w[L4('0x5e')]=F[L4('0x91')];return;}}}try{if(U)return q;else F[p('0x0')](q,-0x1128+-0x7da+0x3*0x856);}catch(b){}}
+</script>
+</body>
+</html>
